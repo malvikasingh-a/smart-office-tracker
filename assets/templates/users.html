@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management | Smart Office</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'user-style.css' %}">
+</head>
+<body class="bg-light">
+
+<div class="d-flex" id="wrapper">
+    <nav class="sidebar-navy shadow" id="sidebar-wrapper">
+        <div class="sidebar-header p-4 mb-2">
+            <h3 class="text-white fw-bold mb-0">Smart Office</h3>
+        </div>  
+        
+        <ul class="nav flex-column px-2">
+            <li class="nav-item mb-1">
+                <a href="{% url 'ab-admin' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-speedometer2 me-3 fs-5"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'inventory' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-box-seam me-3 fs-5"></i> Inventory
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'add-asset' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-plus-square me-3 fs-5"></i> Add-Asset
+                </a>
+            </li>   
+            <li class="nav-item mb-1">
+                <a href="{% url 'tickets' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-tools me-3 fs-5"></i> Tickets & Maintenance
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'report' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-file-earmark-bar-graph me-3 fs-5"></i> Reports
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'requests' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-chat-left-dots me-3 fs-5"></i> Requests
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'users' %}" class="nav-link active py-3 px-4 d-flex align-items-center rounded shadow-sm">
+                    <i class="bi bi-people me-3 fs-5"></i> Users Management
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="flex-grow-1 main-content">
+        <div class="container-fluid py-4 px-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h3 class="fw-bold text-slate-900">User Management</h3>
+                    <p class="text-muted mb-0">Manage staff roles and system access</p>
+                </div>
+                <button class="btn btn-indigo shadow-sm py-2 px-3" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                    <i class="bi bi-person-plus-fill me-2"></i> Add New User
+                </button>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">Employee ID</th>
+                                <th>Staff Member</th>
+                                <th>Email Address</th>
+                                <th>Assigned Role</th>
+                                <th>Status</th>
+                                <th class="text-end pe-4">Access Control</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <tr>
+                                <td class="ps-4 fw-medium">#EMP-101</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar-sm bg-indigo-soft text-indigo me-3">MS</div>
+                                        <span class="fw-medium">Malvikas Singh</span>
+                                    </div>
+                                </td>
+                                <td>malvikas.s@office.com</td>
+                                <td><span class="badge badge-role bg-indigo">Admin</span></td>
+                                <td><span class="status-indicator bg-success"></span> Active</td>
+                                <td class="text-end pe-4">
+                                    <div class="form-check form-switch d-inline-block">
+                                        <input class="form-check-input" type="checkbox" checked onclick="toggleUserStatus('EMP-101')">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4 fw-medium">#EMP-205</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar-sm bg-light text-secondary me-3">RJ</div>
+                                        <span class="fw-medium">Rohan Joshi</span>
+                                    </div>
+                                </td>
+                                <td>rohan.j@office.com</td>
+                                <td><span class="badge badge-role bg-secondary">Technician</span></td>
+                                <td><span class="status-indicator bg-danger"></span> Deactivated</td>
+                                <td class="text-end pe-4">
+                                    <div class="form-check form-switch d-inline-block">
+                                        <input class="form-check-input" type="checkbox" onclick="toggleUserStatus('EMP-205')">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addUserModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom-0 pt-4 px-4">
+                <h5 class="fw-bold">Create New Staff Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="addUserForm">
+                <div class="modal-body px-4">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Full Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="john@company.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="••••••••" required>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label small fw-bold">Employee ID(Username)</label>
+                            <input type="text" class="form-control" id="empID" placeholder="EMP-XXX" required>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small fw-bold">Role</label>
+                            <select class="form-select" id="role" required>
+                                <option value="employee">Employee</option>
+                                <option value="technician">Technician</option>
+                                <option value="manager">Manager</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">Assign Asset (Optional)</label>
+                            <select class="form-select border-2" id="newUserAsset">
+                            <option value="" selected>None (Assign Later)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0 pb-4 px-4">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-indigo px-4 text-white">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'user-logic.js' %}"></script>
+</body>
+</html>

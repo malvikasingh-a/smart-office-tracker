@@ -1,0 +1,72 @@
+:root {
+    --indigo: #4f46e5;
+    --slate: #64748b;
+    --navy-blue: #001a4d;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+
+.sidebar-navy {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--navy-blue);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.sidebar-navy .nav-link {
+    color: white !important;
+    opacity: 0.75;
+    transition: 0.2s;
+}
+
+.sidebar-navy .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+.sidebar-navy .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    opacity: 1;
+    font-weight: 600;
+}
+
+.main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    min-height: 100vh;
+}
+
+.stepper { position: relative; margin-bottom: 2rem; }
+.step { text-align: center; position: relative; flex: 1; z-index: 1; }
+.step span {
+    width: 35px; height: 35px; line-height: 35px; border-radius: 50%;
+    background: #e2e8f0; display: inline-block; font-weight: bold; color: var(--slate);
+    transition: 0.3s;
+}
+.step p { font-size: 12px; color: var(--slate); margin-top: 5px; font-weight: 500; }
+.step.active span { background: var(--indigo); color: white; }
+.step.active p { color: var(--indigo); }
+
+/* FADE ANIMATION */
+.form-step { display: none; animation: fadeIn 0.4s ease-in-out; }
+.active-step { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-indigo { background-color: var(--indigo); color: white; border: none; }
+.btn-indigo:hover { background-color: #4338ca; color: white; }
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+}

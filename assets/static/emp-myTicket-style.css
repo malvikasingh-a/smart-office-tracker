@@ -1,0 +1,60 @@
+:root {
+    --navy: #001a4b; 
+    --indigo: #4f46e5;
+    --slate-800: #1e293b;
+}
+
+body {
+    background-color: #f8fafc;
+    font-family: 'Inter', system-ui, sans-serif;
+    margin: 0;
+}
+
+/* Sidebar Styling */
+.sidebar-navy {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--navy) !important; 
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.sidebar-navy .nav-link {
+    color: white !important; 
+    opacity: 0.75; 
+    transition: 0.2s; 
+    
+}
+
+.sidebar-navy .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+    color: white !important;
+}
+
+.sidebar-navy .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    opacity: 1;
+    font-weight: 600;
+    color: white !important;
+}
+
+.content-area {
+    margin-left: 260px;
+    padding: 40px;
+    width: calc(100% - 260px);
+}
+
+/* Card & UI Polishing */
+.rounded-4 { border-radius: 1rem !important; }
+.bg-primary-soft { background-color: #eef2ff; color: var(--indigo); }
+.bg-warning-soft { background-color: #fff9db; color: #d97706; }
+
+.btn-navy {
+    background-color: var(--navy);
+}
+
+/* Profile Dropdown fix */
+.dropdown-toggle::after { display: none; }

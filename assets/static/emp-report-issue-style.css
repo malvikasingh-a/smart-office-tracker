@@ -1,0 +1,48 @@
+:root {
+    --navy-blue: #001a4d;
+    --indigo: #4f46e5;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Sidebar and Layout (Fixed) */
+.sidebar-navy {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--navy-blue);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    min-height: 100vh;
+}
+
+.bg-navy { background-color: var(--navy-blue) !important; }
+
+.sidebar-navy .nav-link { color: white !important; opacity: 0.75; transition: 0.2s; }
+.sidebar-navy .nav-link.active { background-color: rgba(255, 255, 255, 0.15) !important; opacity: 1; font-weight: 600; }
+
+/* Buttons & Inputs */
+.btn-indigo { background-color: var(--indigo); border: none; transition: 0.3s; }
+.btn-indigo:hover { background-color: #4338ca; transform: translateY(-1px); }
+
+.rounded-4 { border-radius: 1rem !important; }
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 0.25rem rgba(79, 70, 229, 0.1);
+}
+
+/* Custom File Input Text Color Fix */
+.form-control::file-selector-button {
+    background-color: #f1f5f9;
+    font-weight: 600;
+}

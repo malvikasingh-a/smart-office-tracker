@@ -1,0 +1,80 @@
+:root {
+    --indigo: #4f46e5;
+    --navy-blue: #001a4d;
+    --slate-900: #0f172a;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+}
+
+.sidebar-navy {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--navy-blue);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.sidebar-navy .nav-link {
+    color: white !important;
+    opacity: 0.75;
+    transition: 0.2s;
+}
+
+.sidebar-navy .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+.sidebar-navy .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    opacity: 1;
+    font-weight: 600;
+}
+
+.main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+}
+
+
+.btn-indigo {
+    background-color: var(--indigo);
+    color: white;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-indigo:hover {
+    background-color: #4338ca;
+    color: white;
+}
+
+.bg-warning-soft { background-color: #fffbeb; }
+.text-warning { color: #d97706 !important; }
+
+.table thead th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    color: #64748b;
+    padding: 1rem;
+}
+
+.table tbody td {
+    padding: 1rem;
+}
+
+.list-group-item {
+    transition: background-color 0.2s;
+}
+
+.list-group-item:hover {
+    background-color: #f8fafc;
+}
+
+.text-indigo { color: var(--indigo); }

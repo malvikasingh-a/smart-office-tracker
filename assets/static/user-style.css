@@ -1,0 +1,73 @@
+:root {
+    --indigo: #4f46e5;
+    --indigo-soft: #eef2ff;
+    --navy-blue: #001a4d;
+    --slate-900: #0f172a;
+}
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    overflow-x: hidden;
+}
+
+/* Sidebar Continuity Styling */
+.sidebar-navy {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--navy-blue);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.sidebar-navy .nav-link {
+    color: white !important;
+    opacity: 0.75;
+    transition: 0.2s;
+}
+
+.sidebar-navy .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+.sidebar-navy .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    opacity: 1;
+    font-weight: 600;
+}
+
+.main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+}
+
+/* User Page Custom Styles */
+.btn-indigo { background-color: var(--indigo); color: white; border: none; }
+.btn-indigo:hover { background-color: #4338ca; color: white; }
+
+.avatar-sm {
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; font-weight: bold; font-size: 0.8rem;
+}
+
+.badge-role {
+    font-weight: 500; padding: 0.4em 0.8em; border-radius: 6px;
+}
+
+.status-indicator {
+    display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; margin-right: 5px;
+}
+
+.table thead th {
+    font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.05rem; color: #64748b; padding: 1rem;
+}
+
+/* Switch Styling */
+.form-check-input:checked {
+    background-color: var(--indigo); border-color: var(--indigo);
+}

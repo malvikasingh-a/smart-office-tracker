@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Asset | Smart Office</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'form-style.css' %}">
+</head>
+<body class="bg-light">
+
+<div class="d-flex" id="wrapper">
+    <nav class="sidebar-navy shadow" id="sidebar-wrapper">
+        <div class="sidebar-header p-4 mb-2">
+            <h3 class="text-white fw-bold mb-0">Smart Office</h3>
+        </div>
+        
+        <ul class="nav flex-column px-2">
+            <li class="nav-item mb-1">
+                <a href="{% url 'ab-admin' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-speedometer2 me-3 fs-5"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'inventory' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-box-seam me-3 fs-5"></i> Inventory
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'add-asset' %}" class="nav-link active py-3 px-4 d-flex align-items-center rounded shadow-sm">
+                    <i class="bi bi-plus-square me-3 fs-5"></i> Add-Asset
+                </a>
+            </li>   
+            <li class="nav-item mb-1">
+                <a href="{% url 'tickets' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-tools me-3 fs-5"></i> Tickets & Maintenance
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'report' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-file-earmark-bar-graph me-3 fs-5"></i> Reports
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'requests' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-chat-left-dots me-3 fs-5"></i> Requests
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'users' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-people me-3 fs-5"></i> Users Management
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="flex-grow-1 main-content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4 py-3 shadow-sm mb-4">
+            <h5 class="fw-bold mb-0">Register New Asset</h5>
+        </nav>
+
+        <div class="container py-2">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 pt-4">
+                            <div class="stepper d-flex justify-content-between">
+                                <div class="step active" data-step="1"><span>1</span><p>Basic</p></div>
+                                <div class="step" data-step="2"><span>2</span><p>ID</p></div>
+                                <div class="step" data-step="3"><span>3</span><p>Finance</p></div>
+                                <div class="step" data-step="4"><span>4</span><p>Warranty</p></div>
+                            </div>
+                        </div>
+
+                        <div class="card-body p-4 p-md-5">
+                          
+                           <form id="assetForm" novalidate>
+                                <div class="form-step active-step" id="step1">
+                                    <h5 class="fw-bold mb-4">Step 1: Basic Details</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6"><label class="form-label">Asset Name*</label><input type="text" class="form-control" id="name" autocomplete="off" required></div>
+                                        <div class="col-md-6"><label class="form-label">Category*</label>
+                                            <select class="form-select" id="category" autocomplete="off" required>
+                                                <option value="">Select Category</option>
+                                                <option value="Electronics">Electronics</option>
+                                                <option value="Furniture">Furniture</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6"><label class="form-label">Brand</label><input type="text" class="form-control" id="brand" name="brand"></div>
+                                        <div class="col-md-6"><label class="form-label">Model</label><input type="text" class="form-control" id="model" name="model"></div>
+                                    </div>
+                                </div>
+                                <div class="form-step" id="step2">
+                                    <h5 class="fw-bold mb-4">Step 2: Identification</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6"><label class="form-label">Serial Number*</label><input type="text" class="form-control" id="serial_number" autocomplete="off" required></div>
+                                        <div class="col-md-6"><label class="form-label">QR/Barcode ID</label><input type="text" class="form-control" id="qr_id"></div>
+                                    </div>
+                                </div>
+                                <div class="form-step" id="step3">
+                                    <h5 class="fw-bold mb-4">Step 3: Details</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6"><label class="form-label">Purchase Price ($)*</label><input type="number" class="form-control" id="purchase_price" autocomplete="off" required></div>
+                                        <div class="col-md-6"><label class="form-label">Purchase Date</label><input type="date" class="form-control" id="purchase_date"></div>
+                                         <div class="col-md-6"><label class="form-label">Vendor Name</label><input type="text" class="form-control" id="vendor_name"></div> 
+                                        <div class="col-md-6"><label class="form-label">Status</label>
+                                            <select class="form-select" id="status">
+                                                <option value="available">Available</option>
+                                                <option value="assigned">Assigned</option>
+                                                <option value="maintenance">Maintenance</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-step" id="step4">
+                                    <h5 class="fw-bold mb-4">Step 4: Summary</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6"><label class="form-label">Warranty Expiry Date</label><input type="date" class="form-control" id="warranty_expiry"></div>
+                                        <div class="col-md-6"><label class="form-label">Assigned Department</label><select class="form-select" id="assigned_department"><option value="">Select Department</option><option value="IT">IT</option><option value="HR">HR</option><option value="Finance">Finance</option></select></div>
+                                        <div class="col-md-12"><label class="form-label">Floor/Room Number</label><input type="text" class="form-control" id="location" placeholder="e.g. Floor 2, Room 204"></div>
+                                    </div>
+                                    <p class="text-muted">Please review details before saving.</p>
+                                </div>
+
+                                <div class="form-footer mt-5 d-flex justify-content-between">
+                                    <button type="button" class="btn btn-outline-secondary px-4 d-none" id="prevBtn">Back</button>
+                                    <button type="button" class="btn btn-indigo px-4 ms-auto" id="nextBtn">Next Step</button>
+                                    <button type="submit" class="btn btn-success px-4 d-none" id="submitBtn">Save Asset</button>
+                                </div>
+                            </form>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'form-logic.js' %}"></script>
+</body>
+</html>

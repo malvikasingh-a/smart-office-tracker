@@ -1,0 +1,81 @@
+:root {
+    --indigo: #4f46e5;
+    --indigo-soft: #eef2ff;
+    --navy-blue: #001a4d;
+    --slate-900: #0f172a;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    color: #1e293b;
+    overflow-x: hidden;
+}
+
+.sidebar-navy {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--navy-blue);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.sidebar-navy .nav-link {
+    color: white !important;
+    opacity: 0.75;
+    transition: 0.2s;
+}
+
+.sidebar-navy .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+.sidebar-navy .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    opacity: 1;
+    font-weight: 600;
+}
+
+.main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+}
+
+/* Request Card Styling */
+.request-card {
+    transition: all 0.2s ease-in-out;
+}
+.request-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important;
+}
+
+.avatar {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 1.1rem;
+}
+
+/* Custom Soft Badges */
+.bg-danger-soft { background-color: #fee2e2; }
+.bg-indigo-soft { background-color: var(--indigo-soft); }
+.text-indigo { color: var(--indigo); }
+
+.btn-indigo { background-color: var(--indigo); color: white; border: none; }
+.btn-indigo:hover { background-color: #4338ca; color: white; }
+
+/* Action Panels Animation */
+.action-panel {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-select-sm, .form-control-sm {
+    border-color: #e2e8f0;
+}

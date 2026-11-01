@@ -1,0 +1,85 @@
+
+
+ :root {
+    --navy-blue: #001a4d;
+    --indigo-600: #4f46e5;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #334155;
+    overflow-x: hidden;
+}
+
+/* Sidebar Styling */
+.sidebar-navy {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--navy-blue);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.sidebar-navy .nav-link {
+    color: white !important;
+    font-weight: 400;
+    transition: 0.2s;
+    opacity: 0.75;
+}
+
+.sidebar-navy .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+.sidebar-navy .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    opacity: 1;
+    font-weight: 600;
+}
+
+/* Content Layout */
+.main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+}
+
+/* Profile Dropdown Custom Styling */
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+}
+
+.dropdown-item {
+    font-size: 0.85rem;
+    padding: 10px 15px;
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f5f9;
+    color: var(--navy-blue);
+}
+
+.bg-success-soft { background-color: #dcfce7; }
+.text-success { color: #16a34a !important; }
+
+/* Stats Card Animation */
+.card-summary {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-summary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

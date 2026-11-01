@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Asset | Smart Office</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'emprequest-style.css' %}">
+</head>
+<body class="bg-light">
+
+<div class="d-flex" id="wrapper">
+    <nav class="sidebar-navy shadow" id="sidebar-wrapper">
+        <div class="sidebar-header p-4 mb-2">
+            <h3 class="text-white fw-bold mb-0">Smart Office</h3>
+        </div>
+        
+        <ul class="nav flex-column px-2">
+            <li class="nav-item mb-1">
+                <a href="{% url 'employee-dash' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-laptop me-3 fs-5"></i> My Assets
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'emprequest-asset' %}" class="nav-link active py-3 px-4 d-flex align-items-center rounded shadow-sm">
+                    <i class="bi bi-plus-circle me-3 fs-5"></i> Request New
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+            <a href="{% url 'emp-request-history' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                <i class="bi bi-clock-history me-3 fs-5"></i> Request History
+            </a>
+            </li>
+
+            <li class="nav-item mb-1">
+            <a href="{% url 'emp-report-issue' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                <i class="bi bi-exclamation-octagon me-3 fs-5"></i> Report Issue
+            </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a href="{% url 'emp-myTicket' %}" class="nav-link py-3 px-4 d-flex align-items-center opacity-75">
+                    <i class="bi bi-ticket-perforated me-3 fs-5"></i> My Tickets
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="flex-grow-1 main-content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4 py-2 shadow-sm">
+            <span class="navbar-text fw-bold text-dark fs-5">Employee Portal</span>
+            <div class="ms-auto d-flex align-items-center">
+                <span class="me-3 text-muted fw-medium">Malvikas Singh</span>
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="background-color:#001a4b; width:35px; height: 35px;">MS</div>
+            </div>
+        </nav>
+
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-header bg-white border-0 pt-4 px-4">
+                            <h4 class="fw-bold text-dark mb-1">Request New Asset</h4>
+                            <p class="text-muted small">Submit details for the equipment you need.</p>
+                        </div>
+
+                        <div class="card-body p-4 p-md-5 pt-0">
+                            <form id="newRequestForm" novalidate>
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold small text-uppercase text-muted">Asset Category*</label>
+                                    <select class="form-select py-2" id="assetCategory" required>
+                                        <option value="" selected disabled>Choose a category...</option>
+                                        <option value="stationery">Stationery</option>
+                                        <option value="electronics">Electronics</option>
+                                        <option value="furniture">Furniture</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold small text-uppercase text-muted">Model / Specification Preference</label>
+                                    <input type="text" class="form-control py-2" placeholder="e.g. 16GB RAM Laptop" id="specs">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold small text-uppercase text-muted">Reason for Request*</label>
+                                    <textarea class="form-control" rows="4" placeholder="Why do you need this asset?" required id="reason"></textarea>
+                                </div>
+
+                                <div class="mb-5">
+                                    <label class="form-label fw-bold small text-uppercase d-block mb-3 text-muted">Urgency Level*</label>
+                                    <div class="d-flex gap-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="urgency" id="low" value="low" checked>
+                                            <label class="form-check-label" for="low">Low</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="urgency" id="medium" value="medium">
+                                            <label class="form-check-label" for="medium">Medium</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="urgency" id="high" value="high">
+                                            <label class="form-check-label text-danger" for="high">High</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between pt-3 border-top">
+                                    <button type="button" class="btn btn-light px-4 border" onclick="history.back()">Cancel</button>
+                                    <button type="submit" class="btn btn-indigo px-5 text-white fw-bold">Submit Request</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'emprequest-logic.js' %}"></script>
+</body>
+</html>

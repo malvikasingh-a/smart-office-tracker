@@ -1,0 +1,62 @@
+/* Ensure the body takes full height for the login page */
+/* Navy Blue Theme Variable */
+:root {
+    --navy-blue: #001f3f;
+    --indigo: #4f46e5;
+}
+
+body.bg-light {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.bg-navy {
+    background-color: var(--navy-blue) !important;
+}
+
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    border-bottom: none;
+}
+
+.form-label {
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+.form-control, .form-select {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.btn-primary {
+    background-color: var(--indigo);
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #4338ca;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.text-muted {
+    font-size: 0.85rem;
+}

@@ -1,0 +1,37 @@
+:root {
+    --navy-blue: #001a4d;
+    --indigo: #4f46e5;
+}
+
+.sidebar-navy {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--navy-blue);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+}
+
+.sidebar-navy .nav-link { color: white !important; opacity: 0.75; transition: 0.2s; }
+.sidebar-navy .nav-link.active { background-color: rgba(255, 255, 255, 0.15) !important; opacity: 1; font-weight: 600; }
+
+/* Status Badges */
+.bg-warning-soft { background-color: #fff9db; }
+.bg-success-soft { background-color: #ebfbee; }
+.bg-danger-soft { background-color: #fff5f5; }
+
+.text-indigo { color: var(--indigo); }
+.cursor-pointer { cursor: pointer; }
+
+/* Tooltip Styling */
+.tooltip-inner {
+    background-color: var(--navy-blue);
+    font-size: 0.8rem;
+    padding: 8px 12px;
+}

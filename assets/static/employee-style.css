@@ -1,0 +1,79 @@
+:root {
+    --navy-blue: #001a4d;
+    --indigo: #4f46e5;
+    --slate-800: #1e293b;
+}
+
+body {
+    background-color: #f8fafc;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+}
+
+.sidebar-navy {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--navy-blue);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.sidebar-navy .nav-link {
+    color: white !important;
+    opacity: 0.75;
+    transition: 0.2s;
+}
+
+.sidebar-navy .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+.sidebar-navy .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    opacity: 1;
+    font-weight: 600;
+}
+
+/* Main Content Area */
+.main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    min-height: 100vh;
+}
+
+/* Welcome Banner */
+.welcome-banner {
+    background: linear-gradient(135deg, #001a4d 0%, #4f46e5 100%);
+}
+
+.rounded-4 { border-radius: 1.25rem !important; }
+
+/* Asset Cards */
+.asset-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.asset-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.asset-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Dropdown Styling */
+.dropdown-toggle::after { display: none; }
+.dropdown-menu { animation: fadeIn 0.2s ease-out; }
+
+.bg-success-soft { background-color: #dcfce7; }
+.bg-info-soft { background-color: #e0f2fe; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
