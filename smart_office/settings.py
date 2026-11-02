@@ -85,11 +85,11 @@ WSGI_APPLICATION = 'smart_office.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('NAME'),  
-        'USER': config('USER'),              
-        'PASSWORD': config('PASSWORD'), 
-        'HOST': config('HOST'),         
-        'PORT': config('DB_PORT', default='27227'),              
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', default='27227'),
     }
 }   
 
