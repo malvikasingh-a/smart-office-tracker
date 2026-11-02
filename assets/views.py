@@ -4,7 +4,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.views import APIView
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, get_user_model, login
 from rest_framework.permissions import AllowAny
 from .models import User, Asset, AssetRequest, MaintenanceTicket
 from .serializers import UserSerializer, AssetSerializer, AssetRequestSerializer, MaintenanceTicketSerializer
@@ -26,6 +26,7 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.conf import settings
 
+User = get_user_model()
 # 1. Asset ViewSet
 class AssetViewSet(viewsets.ModelViewSet):
     queryset = Asset.objects.all()
@@ -73,10 +74,11 @@ class LoginAPIView(APIView):
         
         if user:
             login(request, user) 
-            user_role = user.role
+            user_role = getattr(user, 'role', 'employee')
+            #user_role = user.role
             if user.is_superuser or user.is_staff:
                 user_role = 'admin'
-                
+
             return Response({
                 "status": "success",
                 "role": user.role,
