@@ -8,6 +8,21 @@ function toggleUserStatus(empId) {
 document.getElementById('addUserForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const role = document.getElementById('role').value;
@@ -16,7 +31,9 @@ document.getElementById('addUserForm').addEventListener('submit', function(e) {
     console.log("Data Sent -> Name:", name, " | Email:", email, " | Role:", role, " | EmpID:", emp_id, " | Pass:", password);
     fetch('/api/add-user/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+         },
         body: JSON.stringify({
             name: name,
             email: email,
@@ -25,15 +42,19 @@ document.getElementById('addUserForm').addEventListener('submit', function(e) {
             password: password
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Server response with status ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.status === 'success') {
-    alert(data.message);
-    document.getElementById('addUserForm').reset();
-    
-    window.location.reload(); 
+            alert(data.message);
+            document.getElementById('addUserForm').reset();
+            window.location.reload(); 
       } else {
-    alert("Error: " + data.message);
+            alert("Error: " + data.message);
 }
     })
     .catch(error => {

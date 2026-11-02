@@ -4,7 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function fetchDashboardData() {
         fetch('/api/admin-dashboard-stats/')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Server response with status ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.status === 'success') {
                 const empElement = document.getElementById('dashTotalEmployees');
