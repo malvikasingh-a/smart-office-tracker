@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log("Sending Data:", { name, category, brand, model, serial_number, status });
 
-        fetch('http://127.0.0.1:8000/api/add-asset-custom/', { 
+        fetch('/api/add-asset-custom/', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

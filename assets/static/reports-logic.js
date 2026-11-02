@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchReportsData() {
-    fetch('http://127.0.0.1:8000/api/reports/')
+    fetch('/api/reports/')
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
