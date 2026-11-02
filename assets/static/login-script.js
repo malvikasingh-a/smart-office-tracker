@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = document.getElementById('password').value;
 
             // 3. Django API Call
-            fetch('/api/login/', {
+           fetch('/api/login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,25 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.json();
             })
             .then(data => {
-                // Backend se success milne par details save karein
                 alert(`Login Successful as ${data.role.toUpperCase()}!`);
-                
-                // localStorage mein session data store karein
                 localStorage.setItem('userRole', data.role);
                 localStorage.setItem('username', data.username);
                 localStorage.setItem('userId', data.user_id);
-
-                // --- MAIN FIX YAHAN HAI ---
-                // Role ko humesha lowercase mein convert kar liya taaki Capital letter ka error na aaye
-                const safeRole = data.role ? String(data.role).toLowerCase() : '';
-
-                // 4. Sahi Redirection Logic
+                const safeRole = data.role ? String(data.role).toLowerCase() : ''; 
                 if (safeRole === 'admin') {
                     window.location.href = '/ab-admin/'; 
                 } else if (safeRole === 'employee') {
                     window.location.href = '/employee-dash/';
                 } else {
-                    window.location.href = '/'; // Agar inme se koi nahi hai toh home pe jao
+                    window.location.href = '/'; 
                 }
             })
             .catch(error => {

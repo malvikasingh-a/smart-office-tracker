@@ -73,7 +73,10 @@ class LoginAPIView(APIView):
         
         if user:
             login(request, user) 
-            
+            user_role = user.role
+            if user.is_superuser or user.is_staff:
+                user_role = 'admin'
+                
             return Response({
                 "status": "success",
                 "role": user.role,
