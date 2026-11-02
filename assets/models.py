@@ -68,11 +68,11 @@ class AssetRequest(models.Model):
     # Database Fields
     employee = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     category = models.CharField(max_length=100)
-    specs = models.CharField(max_length=255, blank=True, null=True) # Blank allowed rakha hai in case user specs na bhare
+    specs = models.CharField(max_length=255, blank=True, null=True) 
     reason = models.TextField()
     urgency = models.CharField(max_length=20, choices=URGENCY_CHOICES, default='low')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    created_at = models.DateTimeField(auto_now_add=True) # Admin panel me date dikhane ke liye
+    created_at = models.DateTimeField(auto_now_add=True) 
 
     def __str__(self):
         return f"{self.category} Request - {self.status}"

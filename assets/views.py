@@ -127,59 +127,72 @@ def Emp_ticket_history_page_view(request):
     return render(request, 'emp-myTicket.html')
 
 
-# assets/views.py
-class  AddUserAPIView(APIView):
+# add users/views.py
+class AddUserAPIView(APIView):
     authentication_classes = [] 
     permission_classes = [AllowAny]
 
-def post(self, request):
-    try:
-        name = request.data.get('name')
-        email = request.data.get('email')
-        password = request.data.get('password')
-        role = request.data.get('role')
-        emp_id = request.data.get('emp_id')
-        access_status = request.data.get('status')
+    def post(self, request):
+        try:
+            name = request.data.get('name')
+            email = request.data.get('email')
+            password = request.data.get('password')
+            role = request.data.get('role')
+            emp_id = request.data.get('emp_id')
+            access_status = request.data.get('status')
 
-        user = User.objects.create_user(
-            username=emp_id if emp_id else email,
-            email=email,
-            password=password,
-            name=name,
+            # Validation
+            if not email:
+                return Response({"status": "error", "message": "Email is required!"}, status=status.HTTP_400_BAD_REQUEST)
+
+            username_to_use = emp_id if emp_id else email
+
+            # Check if user already exists
+            if User.objects.filter(username=username_to_use).exists() or User.objects.filter(email=email).exists():
+                return Response({"status": "error", "message": "User with this Email or Employee ID already exists!"}, status=status.HTTP_400_BAD_REQUEST)
+
+            user = User.objects.create_user(
+                username=username_to_use,
+                email=email,
+                password=password
+            )
+            if name:
+                user.first_name = name
             
-        )
+            if role:
+                user.role = role.lower()
+                
+            # Admin permissions logic
+            if role and role.lower() == 'admin':
+                user.is_staff = True
+                user.is_superuser = True 
+            else:
+                user.is_staff = False
+                user.is_superuser = False
 
-        if role and role.lower() == 'admin':
-            user.is_staff = True
-            user.is_superuser = True 
-        else:
-            user.is_staff = False
-            user.is_superuser = False
+            # Access Control Logic
+            if access_status and access_status.lower() == 'disabled':
+                user.is_active = False
+            else:
+                user.is_active = True
 
-        # 2. FIX: ACCESS CONTROL LOGIC
-        if access_status and access_status.lower() == 'disabled':
-            user.is_active = False
-        else:
-            user.is_active = True
+            user.save()
 
-        user.save()
+            # 3. Asset Assignment
+            asset_id = request.data.get('asset_id')
+            if asset_id:
+                try:
+                    asset = Asset.objects.get(id=asset_id, status='active')
+                    asset.assigned_to = user
+                    asset.status = 'pending_acceptance'
+                    asset.save()
+                except Asset.DoesNotExist:
+                    pass
 
-        # 3. FIX: ASSET ASSIGNMENT ON CREATION
-        asset_id = request.data.get('asset_id')
-        if asset_id:
-            try:
-                asset = Asset.objects.get(id=asset_id, status='active')
-                asset.assigned_to = user
-                asset.status = 'pending_acceptance'
-                asset.save()
-            except Asset.DoesNotExist:
-                pass
-
-        return Response({"status": "success", "message": "User created successfully!"}, status=status.HTTP_201_CREATED)
-    
-    except Exception as e:
-        return Response({"status": "error", "message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+            return Response({"status": "success", "message": "User created successfully!"}, status=status.HTTP_201_CREATED)
+        
+        except Exception as e:
+            return Response({"status": "error", "message": f"Server Error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class UserListAPIView(APIView):
     authentication_classes = [] 
