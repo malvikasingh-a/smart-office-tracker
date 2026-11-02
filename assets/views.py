@@ -81,7 +81,7 @@ class LoginAPIView(APIView):
 
             return Response({
                 "status": "success",
-                "role": user.role,
+                "role": user_role,
                 "username": user.username,
                 "user_id": user.id
             })
