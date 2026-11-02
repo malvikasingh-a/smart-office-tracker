@@ -134,19 +134,19 @@ class  AddUserAPIView(APIView):
 
 def post(self, request):
     try:
-        first_name = request.data.get('first_name')
-        last_name = request.data.get('last_name')
+        name = request.data.get('name')
         email = request.data.get('email')
         password = request.data.get('password')
         role = request.data.get('role')
+        emp_id = request.data.get('emp_id')
         access_status = request.data.get('status')
 
         user = User.objects.create_user(
-            username=email,
+            username=emp_id if emp_id else email,
             email=email,
             password=password,
-            first_name=first_name,
-            last_name=last_name
+            name=name,
+            
         )
 
         if role and role.lower() == 'admin':
