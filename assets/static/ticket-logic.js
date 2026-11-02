@@ -103,7 +103,7 @@ function loadTicket(id) {
             </div>
 
             <div class="col-lg-5">
-                <!-- ACTION PANEL NAYA HAI -->
+                <!-- ACTION PANEL -->
                 <div class="card border-0 shadow-sm border-top border-primary border-4">
                     <div class="card-body p-4">
                         <h6 class="fw-bold mb-3"><i class="bi bi-gear-fill me-2 text-primary"></i>Take Action</h6>

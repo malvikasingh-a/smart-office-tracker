@@ -52,14 +52,14 @@
             <span class="navbar-text fw-bold text-dark fs-5">Employee Portal</span>
             
             <div class="ms-auto dropdown">
-    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark p-1" id="empProfileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="me-3 text-muted fw-medium d-none d-md-block text-capitalize">
-            {% if request.user.first_name %}
-                {{ request.user.first_name }} {{ request.user.last_name }}
-            {% else %}
-                {{ request.user.username }}
-            {% endif %}
-        </span>
+                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark p-1" id="empProfileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="me-3 text-muted fw-medium d-none d-md-block text-capitalize">
+                    {% if request.user.first_name %}
+                        {{ request.user.first_name }} {{ request.user.last_name }}
+                    {% else %}
+                        {{ request.user.username }}
+                    {% endif %}
+                </span>
         
         <div class="rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold shadow-sm text-uppercase" style="background-color:#001a4b; width:35px; height: 35px; font-size: 14px;">
             {% if request.user.first_name %}

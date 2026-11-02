@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchDashboardData();
 
     function fetchDashboardData() {
-        fetch('http://127.0.0.1:8000/api/admin-dashboard-stats/')
+        fetch('/api/admin-dashboard-stats/')
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {

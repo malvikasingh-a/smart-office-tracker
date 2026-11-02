@@ -14,7 +14,7 @@ document.getElementById('addUserForm').addEventListener('submit', function(e) {
     const emp_id = document.getElementById('empID').value;
     const password = document.getElementById('password').value;
     console.log("Data Sent -> Name:", name, " | Email:", email, " | Role:", role, " | EmpID:", emp_id, " | Pass:", password);
-    fetch('http://127.0.0.1:8000/api/add-user/', {
+    fetch('/api/add-user/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function fetchUsers() {
-    fetch('http://127.0.0.1:8000/api/users/')
+    fetch('/api/users/')
     .then(response => response.json())
     .then(data => {
         const tableBody = document.getElementById('userTableBody');
